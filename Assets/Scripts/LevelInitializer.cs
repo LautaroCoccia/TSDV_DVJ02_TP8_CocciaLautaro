@@ -17,8 +17,9 @@ public class LevelInitializer : MonoBehaviour
 
             for (int j = 0; j < width; j++)
             {
-               GameObject obj = Instantiate(bricks);
-               obj.transform.position = new Vector3((j * bricks.transform.localScale.x) + bricks.transform.localScale.x +1 + spaceX, 18 - i- spaceY, 0);
+                GameObject obj = Instantiate(bricks);
+                obj.transform.SetParent(gameObject.transform);
+                obj.transform.position = new Vector3((j * bricks.transform.localScale.x) + bricks.transform.localScale.x +1 + spaceX, 18 - i- spaceY, 0);
                 spaceX += 0.25f;
             }
             spaceY += 0.25f;
