@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
         if(ball.transform.position.y<=0)
         {
             life--;
-            ball.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
     }
     void FixedUpdate()

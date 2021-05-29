@@ -2,29 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ballcontroller : MonoBehaviour
+public class BallController : MonoBehaviour
 {
-    enum BallStates
+    [SerializeField] float horizontalForce;
+    [SerializeField] float verticalForce;
+    [SerializeField] Transform player;
+    Rigidbody rb;
+    Vector3 lastVelocity;
+    enum BallState
     {
-        idle,
-        moving
+        init,
+        move
     }
-    BallStates ballStates;
+    BallState state;
     // Start is called before the first frame update
     void Start()
     {
-        ballStates = BallStates.idle;
-    }
+        state = BallState.init;
+        rb = GetComponent<Rigidbody>();
 
+    }
     // Update is called once per frame
     void Update()
     {
-        switch(ballStates)
+        switch (state)
         {
-            case BallStates.idle:
+            case BallState.init:
+                transform.position = new Vector3(player.position.x, player.position.y + 1, 0);
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    rb.AddForce(horizontalForce, verticalForce, 0);
+                    state = BallState.move;
+                }
                 break;
-            case BallStates.moving:
+            case BallState.move:
+                lastVelocity = rb.velocity;
                 break;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        float speed = lastVelocity.magnitude;
+        Vector3 direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
+        rb.velocity = direction * Mathf.Max(speed, 0f);
     }
 }

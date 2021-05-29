@@ -7,6 +7,7 @@ public class LevelInitializer : MonoBehaviour
     [SerializeField] int height;
     [SerializeField] int width;
     [SerializeField] GameObject bricks;
+    
     // Start is called before the first frame update
     void Start()
     {
