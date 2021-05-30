@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
         if(ball.transform.position.y<=0)
         {
             life--;
+            if (life <= 0)
+                Debug.Log("SE ACABO");
         }
     }
     void FixedUpdate()
