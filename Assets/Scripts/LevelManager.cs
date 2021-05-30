@@ -8,8 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] int lives = 3;
     [SerializeField] int score = 0;
-    [SerializeField] int enemiesLeft = 0;
-
+    [SerializeField] int objAlive = 0;
+    [SerializeField] int scoreToAdd = 0;
     [SerializeField] private TextMeshProUGUI UIScore;
     [SerializeField] private TextMeshProUGUI UIHealth;
     [SerializeField] private TextMeshProUGUI UIEnemies;
@@ -39,30 +39,36 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         UIHealth.text = ("Lives: " + lives);
-        UIEnemies.text = ("Left: " + enemiesLeft);
+        UIEnemies.text = ("Left: " + objAlive);
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && lives > 0)
         {
             SetPause();
         }
+
     }
-    public void StartEnemies()
+    public void StartObj()
     {
-        enemiesLeft++;
+        objAlive++;
+        UIEnemies.text = ("Left: " + objAlive);
     }
-    public void UpdateEnemies()
+    public void UpdateObj()
     {
-        enemiesLeft--;
-        UIEnemies.text = ("Left: " + enemiesLeft);
+        objAlive--;
+        UIEnemies.text = ("Left: " + objAlive);
+        if(objAlive<=0)
+        {
+            GameOver();
+        }
     }
-    public void UpdateScore(int SCORE)
+    public void UpdateScore()
     {
-        score += SCORE;
+        score += scoreToAdd;
         UIScore.text = ("Score: " + score);
     }
-    public void UpdateHealth()
+    public void UpdateLives()
     {
         lives--;
         if(lives< minLives)
