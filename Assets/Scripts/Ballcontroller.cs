@@ -6,6 +6,7 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] float horizontalForce;
     [SerializeField] float verticalForce;
+    [SerializeField] float increase;
     [SerializeField] Transform player;
     Rigidbody rb;
     Vector3 lastVelocity;
@@ -37,13 +38,28 @@ public class BallController : MonoBehaviour
                 break;
             case BallState.move:
                 lastVelocity = rb.velocity;
+                if (transform.position.y < 0)
+                    state = BallState.init;
                 break;
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
         float speed = lastVelocity.magnitude;
-        Vector3 direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
-        rb.velocity = direction * Mathf.Max(speed, 0f);
+        Vector3 direction;
+        if(collision.gameObject.tag == "Player")
+        {
+            int i;
+            do
+            {
+                i = Random.Range(-1, 1);
+            } while (i == 0);
+            direction = Vector3.Reflect(lastVelocity.normalized * i, collision.contacts[0].normal);
+        }
+        else
+        {
+            direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
+        }
+        rb.velocity = new Vector3( direction.x * Mathf.Max(speed, 0f) + increase, direction.y * Mathf.Max(speed, 0f) + increase);
     }
 }
