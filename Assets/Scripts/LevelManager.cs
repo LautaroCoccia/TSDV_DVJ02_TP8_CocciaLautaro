@@ -14,9 +14,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UIEnemies;
     [SerializeField] private TextMeshProUGUI UIExtras;
     [SerializeField] private Image UIHealth;
-    [SerializeField] private GameObject PauseMenuUI;
-    [SerializeField] private GameObject QuitMenuUI;
-    [SerializeField] private GameObject GameOverMenuUI;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject quitMenuUI;
+    [SerializeField] private GameObject gameOverMenuUI;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button mainMenuButton;
 
     private static bool pause = false;
     private static LevelManager _instanceLevelManager;
@@ -38,6 +40,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+        pause = false;
         SetTimeScale(1);
         UIHealth.fillAmount = 1;
         UIEnemies.text = ("Left: " + objAlive);//Solo sirve para hacer debug
@@ -87,7 +90,10 @@ public class LevelManager : MonoBehaviour
     private void GameOver()
     {
         SetTimeScale(0);
-        GameOverMenuUI.SetActive(true);
+        gameOverMenuUI.SetActive(true);
+        continueButton.Select();
+        mainMenuButton.Select();
+
     }
     public void SetPause()
     {
@@ -95,13 +101,26 @@ public class LevelManager : MonoBehaviour
         if (pause)
         {
             SetTimeScale(0);
-            PauseMenuUI.SetActive(pause);
+            pauseMenuUI.SetActive(pause);
+            continueButton.Select();
         }
         else
         {
             SetTimeScale(1);
-            PauseMenuUI.SetActive(pause);
-            QuitMenuUI.SetActive(pause);
+            pauseMenuUI.SetActive(pause);
+            quitMenuUI.SetActive(pause);
+            mainMenuButton.Select();
+        }
+    }
+    public void SelectButton()
+    {
+        if (continueButton.IsActive())
+        {
+            continueButton.Select();
+        }
+        else if (mainMenuButton.IsActive())
+        {
+            mainMenuButton.Select();
         }
     }
 }
