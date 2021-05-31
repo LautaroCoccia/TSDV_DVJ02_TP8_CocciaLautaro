@@ -10,6 +10,7 @@ public class LevelInitializer : MonoBehaviour
     [SerializeField] GameObject limitPrefab;
     [SerializeField] GameObject player;
     [SerializeField] GameObject backgroundPrefab;
+    [SerializeField] Camera mainCamera;
     [SerializeField] float positionX;
     [SerializeField] float positionY = 18;
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class LevelInitializer : MonoBehaviour
                 }
 
                 obj.transform.SetParent(gameObject.transform);
-                obj.transform.position = new Vector3((j * bricks.transform.localScale.x) + bricks.transform.localScale.x +1 + spaceX, positionY - i- spaceY, 0);
+                obj.transform.position = new Vector3((j * bricks.transform.localScale.x) + bricks.transform.localScale.x  + spaceX, positionY - i- spaceY, 0);
                 positionX = obj.transform.position.x;
                 spaceX += 0.25f;
             }
@@ -75,6 +76,7 @@ public class LevelInitializer : MonoBehaviour
         player.transform.position = new Vector3(positionX, player.transform.position.y, 0);
         GameObject background = Instantiate(backgroundPrefab);
         background.transform.position = new Vector3(positionX, positionY / 2, 0);
-        background.transform.localScale = new Vector3(positionX / 4, 1, positionY / 4); 
+        background.transform.localScale = new Vector3(positionX / 4, 1, positionY / 4);
+        mainCamera.transform.position = new Vector3(positionX, positionY  / 2 + spaceY, mainCamera.transform.position.z);
     }
 }
