@@ -29,6 +29,7 @@ public class BallController : MonoBehaviour
         switch (state)
         {
             case BallState.init:
+                rb.velocity = (Vector3.zero);
                 transform.position = new Vector3(player.position.x, player.position.y + 1, 0);
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -39,7 +40,10 @@ public class BallController : MonoBehaviour
             case BallState.move:
                 lastVelocity = rb.velocity;
                 if (transform.position.y < 0)
+                {
                     state = BallState.init;
+                    LevelManager.Get().UpdateLives();
+                }
                 break;
         }
     }
@@ -47,19 +51,26 @@ public class BallController : MonoBehaviour
     {
         float speed = lastVelocity.magnitude;
         Vector3 direction;
+            direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         if(collision.gameObject.tag == "Player")
         {
-            int i;
+            int changerDirection = 0;
             do
             {
-                i = Random.Range(-1, 1);
-            } while (i == 0);
-            direction = Vector3.Reflect(lastVelocity.normalized * i, collision.contacts[0].normal);
+                changerDirection = Random.Range(-1, 2);
+            } while (changerDirection == 0);
+            rb.velocity = new Vector3(direction.x * (speed) * increase  * changerDirection, direction.y  * (speed) *increase);
         }
         else
         {
-            direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
+            rb.velocity = new Vector3(direction.x * (speed) , direction.y  * (speed) );
         }
-        rb.velocity = new Vector3( direction.x * Mathf.Max(speed, 0f) + increase, direction.y * Mathf.Max(speed, 0f) + increase);
+
+        if (collision.gameObject.tag == "Brick")
+        {
+            LevelManager.Get().UpdateObj();
+            LevelManager.Get().UpdateScore();
+            Destroy( collision.gameObject);
+        }
     }
 }
