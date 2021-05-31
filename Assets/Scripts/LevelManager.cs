@@ -11,9 +11,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int objAlive = 0;
     [SerializeField] int scoreToAdd = 0;
     [SerializeField] private TextMeshProUGUI UIScore;
-    [SerializeField] private TextMeshProUGUI UIHealth;
     [SerializeField] private TextMeshProUGUI UIEnemies;
     [SerializeField] private TextMeshProUGUI UIExtras;
+    [SerializeField] private Image UIHealth;
     [SerializeField] private GameObject PauseMenuUI;
     [SerializeField] private GameObject QuitMenuUI;
     [SerializeField] private GameObject GameOverMenuUI;
@@ -38,7 +38,8 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        UIHealth.text = ("Lives: " + lives);
+        SetTimeScale(1);
+        UIHealth.fillAmount = 1;
         UIEnemies.text = ("Left: " + objAlive);
     }
     private void Update()
@@ -71,11 +72,11 @@ public class LevelManager : MonoBehaviour
     public void UpdateLives()
     {
         lives--;
+        UIHealth.fillAmount -= 0.34f;
         if(lives< minLives)
         {
             GameOver();
         }
-        UIHealth.text = ("Lives: " + lives);
     }
     private void SetTimeScale(int scale)
     {
