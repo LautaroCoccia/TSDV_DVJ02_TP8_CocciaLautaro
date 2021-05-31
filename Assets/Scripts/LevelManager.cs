@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
     {
         SetTimeScale(1);
         UIHealth.fillAmount = 1;
-        UIEnemies.text = ("Left: " + objAlive);
+        UIEnemies.text = ("Left: " + objAlive);//Solo sirve para hacer debug
     }
     private void Update()
     {
@@ -50,11 +50,13 @@ public class LevelManager : MonoBehaviour
         }
 
     }
+    //Solo sirve para hacer debug
     public void StartObj()
     {
         objAlive++;
         UIEnemies.text = ("Left: " + objAlive);
     }
+    //Solo sirve para hacer debug
     public void UpdateObj()
     {
         objAlive--;
