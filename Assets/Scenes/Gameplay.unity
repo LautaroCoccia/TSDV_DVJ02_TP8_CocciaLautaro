@@ -158,6 +158,7 @@ MonoBehaviour:
   player: {fileID: 1874484146}
   backgroundPrefab: {fileID: 5530014095485187913, guid: 9bce07e50ba616f4aa4822bcd3cbe3d3,
     type: 3}
+  mainCamera: {fileID: 963194227}
   positionX: 0
   positionY: 18
 --- !u!4 &236655382
@@ -3290,10 +3291,10 @@ RectTransform:
   m_Father: {fileID: 5440932156447234032}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1635, y: 80}
-  m_SizeDelta: {x: 258.36142, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 285, y: 80}
+  m_SizeDelta: {x: 258.36145, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7537015301048854855
 GameObject:
