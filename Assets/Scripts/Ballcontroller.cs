@@ -49,21 +49,19 @@ public class BallController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        float speed = lastVelocity.magnitude;
-        Vector3 direction;
-            direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             int changerDirection = 0;
             do
             {
                 changerDirection = Random.Range(-1, 2);
             } while (changerDirection == 0);
-            rb.velocity = new Vector3(direction.x * (speed) * increase  * changerDirection, direction.y  * (speed) *increase);
+            rb.velocity = new Vector3(rb.velocity.x * increase * changerDirection, rb.velocity.y * increase);
         }
         else
         {
-            rb.velocity = new Vector3(direction.x * (speed) , direction.y  * (speed) );
+            rb.velocity = rb.velocity * increase ;
+
         }
 
         if (collision.gameObject.tag == "Brick")
@@ -73,4 +71,5 @@ public class BallController : MonoBehaviour
             Destroy( collision.gameObject);
         }
     }
+
 }
