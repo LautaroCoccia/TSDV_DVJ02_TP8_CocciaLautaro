@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
     public void UpdateScore()
     {
         score += scoreToAdd;
-        UIScore.text = ("Score: " + score);
+        UIScore.text = ("" + score);
     }
     public void UpdateLives()
     {
