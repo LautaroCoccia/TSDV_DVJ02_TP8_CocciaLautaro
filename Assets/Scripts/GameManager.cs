@@ -2,6 +2,7 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
+    int Highscore = 0;
     private static GameManager _instanceGameManager;
     public static GameManager Get()
     {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SaveSystem.CreateHighscoreFile();
     }
     public void LoadScene(string scene)
     {
@@ -29,5 +31,14 @@ public class GameManager : MonoBehaviour
 #endif
 
         Application.Quit();
+    }
+    public int GetHighscore()
+    {
+        Highscore = SaveSystem.LoadHighscoreFile();
+        return Highscore;
+    }
+    public void UpdateHighscore(int score)
+    {
+        SaveSystem.SaveHighscore(score);
     }
 }
