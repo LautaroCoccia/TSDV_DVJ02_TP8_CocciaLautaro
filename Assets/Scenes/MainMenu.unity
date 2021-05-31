@@ -415,6 +415,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 455498681743827018, guid: cd2e83d9cb3a4e241af588ea66fd73b6,
+        type: 3}
+      propertyPath: m_Name
+      value: CreditsButton
+      objectReference: {fileID: 0}
     - target: {fileID: 455498681804230269, guid: cd2e83d9cb3a4e241af588ea66fd73b6,
         type: 3}
       propertyPath: m_text
