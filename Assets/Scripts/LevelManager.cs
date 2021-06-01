@@ -90,6 +90,14 @@ public class LevelManager : MonoBehaviour
     private void GameOver()
     {
         SetTimeScale(0);
+        if(GameManager.Get().GetHighscore() <score)
+        {
+            UIExtras.text = ("NEW HIGHSCORE: \n" + score);
+            GameManager.Get().UpdateHighscore(score);
+        }
+        else
+            UIExtras.text = ("HIGHSCORE: " + GameManager.Get().GetHighscore() + "\n"+ 
+                "YOURS: " + score);
         gameOverMenuUI.SetActive(true);
         continueButton.Select();
         mainMenuButton.Select();

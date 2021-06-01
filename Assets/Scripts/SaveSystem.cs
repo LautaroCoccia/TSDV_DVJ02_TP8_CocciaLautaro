@@ -31,7 +31,7 @@ public static class SaveSystem
                 stream = new FileStream(path, FileMode.OpenOrCreate);
                 formatter.Serialize(stream, score);
                 stream.Close();
-                Debug.Log("Save: " + score);
+
             }
         }
     }
@@ -43,7 +43,6 @@ public static class SaveSystem
             FileStream stream = new FileStream(path, FileMode.Open);
             int auxToReturn = (int)formatter.Deserialize(stream);
             stream.Close();
-            Debug.Log("Load: " + auxToReturn);
             return auxToReturn;
         }
         else
